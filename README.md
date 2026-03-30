@@ -8,7 +8,7 @@ Este proyecto consiste en un sistema distribuido de consulta de datos del Padró
 * **Oscar Molina** 
 * **Travis Rivera**
 * **Rhoswen Mora**
-* **Sheerry Avalos**
+* **Sherry Avalos**
 * **Britany Pineda**
 ---
 
