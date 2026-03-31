@@ -2,7 +2,6 @@
 
 Este sistema permite la consulta distribuida de datos del Padrón Electoral de Costa Rica. Utiliza una arquitectura de capas para procesar archivos planos y ofrecer respuestas a través de una interfaz gráfica (GUI) y dos servidores de red (TCP y HTTP).
 
----
 
 ##  Integrantes del Grupo
 * **Oscar Molina** 
@@ -11,16 +10,16 @@ Este sistema permite la consulta distribuida de datos del Padrón Electoral de C
 * **Sherry Avalos**
 * **Britany Pineda**
 
----
+
 
 ## Cómo Compilar y Ejecutar
 
 ### Requisitos Previos
 1. **Java JDK 17** o superior instalado.
 2. **IDE NetBeans** (recomendado).
-3. Los archivos de datos deben estar en la carpeta `resources/` con los nombres:
-   * `PADRON_COMPLETO.txt`
-   * `distelec.txt`
+3. Los archivos de datos deben estar en la carpeta resources con los nombres:
+   * PADRON_COMPLETO.txt
+   * distelec.txt
 
 ### Pasos para Ejecutar
 1. Abre el proyecto en NetBeans.
@@ -35,10 +34,10 @@ Este sistema permite la consulta distribuida de datos del Padrón Electoral de C
 
 El servidor TCP permite consultas de bajo nivel mediante una conexión de flujo de datos. Es ideal para sistemas que requieren alta velocidad y confirmación de entrega.
 
-**Formato del Comando:** `ACCION|CEDULA|FORMATO`
+**Formato del Comando:** ACCION|CEDULA|FORMATO
 
-* **Ejemplo de comando:** `GET|101240037|JSON`
-* **Funcionamiento:** El servidor recibe la cadena, la divide usando el separador `|`, busca en el padrón y devuelve el resultado en el formato solicitado antes de cerrar la conexión.
+* **Ejemplo de comando:** GET|101240037|JSON
+* **Funcionamiento:** El servidor recibe la cadena, la divide usando el separador |, busca en el padrón y devuelve el resultado en el formato solicitado antes de cerrar la conexión.
 
 ---
 
@@ -55,10 +54,10 @@ El servidor HTTP permite realizar consultas desde cualquier navegador web o clie
 ## Ejemplos de Requests y Responses
 
 ### 1. Consulta en formato JSON
-**Request (Navegador):** `http://localhost:9090/padron?cedula=101240037&format=json`
+**Request (Navegador):** http://localhost:9090/padron?cedula=101240037&format=json
 
 **Response:**
-```json
+json
 {
   "exito": true,
   "persona": {
