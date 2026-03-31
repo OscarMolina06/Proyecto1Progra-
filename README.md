@@ -1,6 +1,6 @@
 # Proyecto 1: Sistema de Consulta de Padrón Electoral
 
-Este proyecto consiste en un sistema distribuido de consulta de datos del Padrón Electoral de Costa Rica. Permite buscar información de ciudadanos (Nombre, Apellidos y Ubicación) a través de múltiples protocolos de red y una interfaz gráfica amigable.
+Este sistema permite la consulta distribuida de datos del Padrón Electoral de Costa Rica. Utiliza una arquitectura de capas para procesar archivos planos y ofrecer respuestas a través de una interfaz gráfica (GUI) y dos servidores de red (TCP y HTTP).
 
 ---
 
@@ -10,50 +10,62 @@ Este proyecto consiste en un sistema distribuido de consulta de datos del Padró
 * **Rhoswen Mora**
 * **Sherry Avalos**
 * **Britany Pineda**
----
-
-##  Funcionamiento del Sistema
-
-El sistema opera bajo una arquitectura de **Capas (N-Tier)**, lo que separa la base de datos física de la forma en que el usuario interactúa con ella.
-
-###  Componentes Principales:
-1. **Servidor HTTP (Puerto 9090):** Permite consultas mediante cualquier navegador web usando parámetros URL.
-2. **Servidor TCP (Puerto 5555):** Un canal de comunicación de bajo nivel, rápido y seguro, que procesa comandos de texto crudo.
-3. **Interfaz Gráfica (Swing):** Un cliente nativo que permite al usuario digitar la cédula, elegir el formato (JSON/XML) y ver la respuesta de inmediato.
-4. **Lógica de Negocio:** Procesa los archivos de texto planos (`PADRON_COMPLETO.txt` y `distelec.txt`) realizando búsquedas lineales y cruce de datos con Mapas (HashMaps).
 
 ---
 
-##  Cómo utilizar el sistema
+## Cómo Compilar y Ejecutar
 
-### 1. Ejecución
-* Abre el proyecto en **NetBeans**.
-* Asegúrate de que los archivos `.txt` estén en la carpeta `resources/`.
-* Ejecuta la clase `Main.java`.
+### Requisitos Previos
+1. **Java JDK 17** o superior instalado.
+2. **IDE NetBeans** (recomendado).
+3. Los archivos de datos deben estar en la carpeta `resources/` con los nombres:
+   * `PADRON_COMPLETO.txt`
+   * `distelec.txt`
 
-### 2. Consultas vía Web (HTTP)
-Puedes copiar la URL generada en la interfaz o escribir manualmente en el navegador:
-`http://localhost:9090/padron?cedula=101240037&format=json`
-
-### 3. Consultas vía Terminal (TCP)
-Conéctate mediante Telnet o Hercules al puerto `5555` y envía:
-`GET|101240037|XML`
-
----
-
-##  Tecnologías Utilizadas
-* **Lenguaje:** Java 17+
-* **Concurrencia:** Java ExecutorService (Pool de Hilos para múltiples clientes).
-* **Formatos de Salida:** JSON y XML (Serialización manual).
-* **Protocolos:** TCP/IP y HTTP 1.1.
-* **Interfaz:** Java Swing.
+### Pasos para Ejecutar
+1. Abre el proyecto en NetBeans.
+2. Asegúrate de que las rutas de los archivos en la clase `Main` coincidan con tu estructura de carpetas.
+3. Haz clic derecho sobre el proyecto y selecciona **"Clean and Build"**.
+4. Ejecuta la clase `Main.java`. 
+5. Se abrirá automáticamente la **Interfaz Gráfica** y los servidores se activarán en la consola.
 
 ---
 
-##  Estructura del Proyecto
-* `Datos`: Repositorios para lectura de archivos.
-* `DTO`: Objetos de transferencia de datos (Data Transfer Objects).
-* `Entidad`: Clases modelo (Persona, Dirección).
-* `Logica`: Servicio principal de búsqueda.
-* `Presentacion`: Servidores y GUI.
-* `Util`: Serializadores de formato.
+## Protocolo TCP (Puerto 5555)
+
+El servidor TCP permite consultas de bajo nivel mediante una conexión de flujo de datos. Es ideal para sistemas que requieren alta velocidad y confirmación de entrega.
+
+**Formato del Comando:** `ACCION|CEDULA|FORMATO`
+
+* **Ejemplo de comando:** `GET|101240037|JSON`
+* **Funcionamiento:** El servidor recibe la cadena, la divide usando el separador `|`, busca en el padrón y devuelve el resultado en el formato solicitado antes de cerrar la conexión.
+
+---
+
+## Endpoints HTTP (Puerto 9090)
+
+El servidor HTTP permite realizar consultas desde cualquier navegador web o cliente REST. 
+
+| Endpoint | Parámetros | Descripción |
+| :--- | :--- | :--- |
+| `/padron` | `cedula` (String), `format` (json/xml) | Consulta los datos de un ciudadano por su número de cédula. |
+
+---
+
+## Ejemplos de Requests y Responses
+
+### 1. Consulta en formato JSON
+**Request (Navegador):** `http://localhost:9090/padron?cedula=101240037&format=json`
+
+**Response:**
+```json
+{
+  "exito": true,
+  "persona": {
+    "cedula": "101240037",
+    "nombre": "ANA MARIA",
+    "apellido1": "PEREZ",
+    "apellido2": "PEREZ"
+  },
+  "direccion": "PAVAS"
+}
