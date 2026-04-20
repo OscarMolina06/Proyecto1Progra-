@@ -1,6 +1,6 @@
-package datos;
+package Datos;
 
-import entidades.Persona;
+import Entidad.Persona;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
