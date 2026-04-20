@@ -1,8 +1,8 @@
-package logica;
+package Logica_Negocio;
 
-import datos.RepositorioDistelec;
-import datos.RepositorioPadron;
-import dto.RespuestaPadron;
+import Datos.RepositorioDistelec;
+import Datos.RepositorioPadron;
+import DTO.RespuestaPadron;
 import entidades.Direccion;
 import entidades.Persona;
 import java.io.IOException;
