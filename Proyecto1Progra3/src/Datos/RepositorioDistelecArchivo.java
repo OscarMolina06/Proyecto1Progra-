@@ -1,6 +1,6 @@
-package datos;
+package Datos;
 
-import entidades.Direccion;
+import Entidades.Direccion;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.charset.Charset;
