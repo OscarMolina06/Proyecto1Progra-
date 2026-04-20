@@ -1,6 +1,6 @@
-package datos;
+package Datos;
 
-import entidades.Direccion;
+import Entidades.Direccion;
 import java.util.Optional;
 
 public interface RepositorioDistelec {
