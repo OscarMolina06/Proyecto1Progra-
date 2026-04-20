@@ -1,6 +1,6 @@
-package datos;
+package Datos;
 
-import entidades.Persona;
+import Entidades.Persona;
 import java.io.IOException;
 import java.util.Optional;
 
