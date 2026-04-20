@@ -1,16 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package Datos;
+package datos;
 
-import Entidad.Direccion;
+import entidades.Direccion;
 import java.util.Optional;
 
-/**
- *
- * @author sherr
- */
 public interface RepositorioDistelec {
     Optional<Direccion> buscarPorCodigo(String codigoElectoral);
 }
